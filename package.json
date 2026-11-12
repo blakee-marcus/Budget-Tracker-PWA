@@ -8,6 +8,9 @@
     "start": "node server.js",
     "lite-server": "lite-server"
   },
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/coding-boot-camp/unit18hw.git"
@@ -19,7 +22,9 @@
   },
   "homepage": "https://github.com/coding-boot-camp/unit18hw#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "mongoose": "^5.5.15"
+    "compression": "^1.8.2",
+    "express": "^5.3.0",
+    "mongoose": "^9.12.1",
+    "morgan": "^1.12.1"
   }
 }
