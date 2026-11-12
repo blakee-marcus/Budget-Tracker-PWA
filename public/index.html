@@ -2,46 +2,94 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="theme-color" content="#317EFB">
-  <link rel="shortcut icon" href="icons/icon-192x192.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="description" content="Track your income, expenses, and balance.">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
   <link rel="stylesheet" href="css/styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0" defer></script>
+  <script src="js/index.js" defer></script>
 
   <title>Budget Tracker</title>
 </head>
+
 <body>
-  <div class="wrapper">
-    <div class="total">
-      <div class="total">Your total is: $<span id="total">0</span></div>
-    </div>
+  <main class="wrapper">
+    <header class="page-header">
+      <p class="eyebrow">Personal finance</p>
+      <h1>Budget Tracker</h1>
+      <p class="page-description">Keep track of your money in one place.</p>
+    </header>
 
-    <div class="form">
-      <input type="text" id="t-name" placeholder="Name of transaction" />
-      <input type="number" min="0" id="t-amount" placeholder="Transaction amount" />
-      <button id="add-btn"><i class="fa fa-plus buttons"></i> Add Funds</button>
-      <button id="sub-btn"><i class="fa fa-minus"></i> Subtract Funds</button>
-      <p class="error"></p>
-    </div>
+    <section class="balance-card" aria-labelledby="balance-heading">
+      <h2 id="balance-heading" class="section-label">Current balance</h2>
+      <p class="total" role="status" aria-live="polite">$<span id="total">0</span></p>
+    </section>
 
-    <div class="transactions">
-      <table>
-        <thead>
-          <th>Transaction</th>
-          <th>Amount</th>
-        </thead>
-        <tbody id="tbody">
-          
-        </tbody>
-      </table>
-    </div>
-    
-    <canvas id="myChart"></canvas>
-  </div>
+    <section class="form" aria-labelledby="transaction-heading">
+      <div class="section-heading">
+        <h2 id="transaction-heading">New transaction</h2>
+        <p>Record money coming in or going out.</p>
+      </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-  <script src="js/index.js"></script>
+      <div class="form-fields">
+        <div class="field">
+          <label for="t-name">Transaction name</label>
+          <input id="t-name" type="text" placeholder="e.g. Groceries" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="t-amount">Amount ($)</label>
+          <input id="t-amount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button id="add-btn" type="button">
+          <span class="button-icon" aria-hidden="true">+</span>
+          Add funds
+        </button>
+        <button id="sub-btn" class="button-subtract" type="button">
+          <span class="button-icon" aria-hidden="true">−</span>
+          Subtract funds
+        </button>
+      </div>
+
+      <p class="error" role="alert"></p>
+    </section>
+
+    <section class="history-section" aria-labelledby="history-heading">
+      <div class="section-heading">
+        <h2 id="history-heading">Transaction history</h2>
+        <p>Your recorded income and expenses.</p>
+      </div>
+
+      <div class="transactions" role="region" aria-label="Transaction history table" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Transaction</th>
+              <th scope="col">Amount</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="chart-section" aria-labelledby="chart-heading">
+      <div class="section-heading">
+        <h2 id="chart-heading">Balance over time</h2>
+        <p>See how your balance has changed.</p>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="myChart" role="img" aria-label="Line chart showing balance over time">
+          Balance history is also reflected in your transaction table.
+        </canvas>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
